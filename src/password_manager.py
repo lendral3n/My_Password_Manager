@@ -4,8 +4,8 @@ class PasswordManager():
     def __init__(self):
         self.dbs = Database()
 
-    def add_password(self, service, username, password):
-        self.dbs.add_password(service, username, password)
+    def add_password(self, service, username, password, url, notes):
+        self.dbs.add_password(service, username, password, url, notes)
         print(f"Password untuk {service} dan username {username} telah ditambahkan")
         
     def get_password(self, service, username):

@@ -1,7 +1,14 @@
-from database import Database
+from .database import Database
 
 def create_tables():
     db = Database()
+    db.cursor.execute("""
+            CREATE TABLE IF NOT EXISTS users (
+                id INTEGER PRIMARY KEY,
+                pin TEXT,
+                sandi TEXT
+            )
+        """)
     db.cursor.execute("""
         CREATE TABLE IF NOT EXISTS passwords (
             id INTEGER PRIMARY KEY,
@@ -19,7 +26,6 @@ def create_tables():
             id INTEGER PRIMARY KEY,
             action TEXT,
             service TEXT,
-            username TEXT,
             timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
