@@ -1,3 +1,4 @@
+# File: db/database.py
 import sqlite3
 
 class Database:
@@ -12,12 +13,16 @@ class Database:
         """, (service, username, password, url, notes))
         self.conn.commit()
 
-    def get_password(self, service, username):
-        self.cursor.execute("SELECT password FROM passwords WHERE service=? AND username=?", (service, username))
+    def get_password(self, service):
+        self.cursor.execute("SELECT * FROM passwords WHERE service=?", (service,))
         return self.cursor.fetchone()
 
-    def delete_password(self, service, username):
-        self.cursor.execute("DELETE FROM passwords WHERE service=? AND username=?", (service, username))
+    def get_all_passwords(self):
+        self.cursor.execute("SELECT * FROM passwords")
+        return self.cursor.fetchall() 
+
+    def delete_password(self, service):
+        self.cursor.execute("DELETE FROM passwords WHERE service=?", (service,))
         self.conn.commit()
     
     def add_sandi(self, sandi):
@@ -35,4 +40,14 @@ class Database:
     def get_pin(self):
         self.cursor.execute("SELECT pin FROM users")
         return self.cursor.fetchone()
-        
+
+    def add_activity(self, activity):
+        self.cursor.execute("""
+            INSERT INTO activity_log (action)
+            VALUES (?)
+        """, (activity,))
+        self.conn.commit()
+
+    def get_activities(self):
+        self.cursor.execute("SELECT * FROM activity_log")
+        return self.cursor.fetchall()

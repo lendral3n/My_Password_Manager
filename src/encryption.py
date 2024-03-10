@@ -1,9 +1,20 @@
 from cryptography.fernet import Fernet
-from db.database import Database
+
+class KeyGenerator:
+    @staticmethod
+    def generate_key():
+        try:
+            with open("./db/key.key", "rb") as key_file:
+                key = key_file.read()
+        except FileNotFoundError:
+            key = Fernet.generate_key()
+            with open("./db/key.key", "wb") as key_file:
+                key_file.write(key)
+        return key
 
 class Encrypt:
     def __init__(self):
-        self.key = Fernet.generate_key()
+        self.key = KeyGenerator.generate_key()
 
     # Fungsi untuk enkripsi
     def encrypt_message(self, message):

@@ -25,8 +25,7 @@ def create_tables():
         CREATE TABLE IF NOT EXISTS activity_log (
             id INTEGER PRIMARY KEY,
             action TEXT,
-            service TEXT,
-            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         )
     """)
     db.conn.commit()

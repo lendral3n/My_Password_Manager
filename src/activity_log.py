@@ -6,9 +6,15 @@ class ActivityLog:
         self.db = Database()
 
     def log_activity(self, activity):
-        # Simpan aktivitas ke database
         self.db.add_activity(activity)
 
-    def get_logs(self):
-        # Ambil log aktivitas dari database
-        return self.db.get_activities()
+    def get_activities(self):
+        activities = self.db.get_activities()
+        if activities:
+            for activity in activities:
+                print()
+                print(f"Aktivitas ==> {activity[1]}")
+                print(f"Waktu ==> {activity[2]}")
+                print("\n=========================\n")
+        else:
+            print("Tidak ada aktivitas yang dicatat.")
