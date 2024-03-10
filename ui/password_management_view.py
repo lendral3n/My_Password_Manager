@@ -7,7 +7,7 @@ class PasswordManagementView:
     def run(self):
         print("=========================")
         print("1. Tambah Password")
-        print("2. Ambil Password")
+        print("2. Lihat Password")
         print("3. Hapus Password")
         print("0. Kembali")
         
